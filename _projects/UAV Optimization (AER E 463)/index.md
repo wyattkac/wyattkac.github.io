@@ -7,7 +7,7 @@ skills:
   - Python
   - Git
 
-main-image: /463_Drone.png
+main-image: /Drone.png
 ---
 
 ---
@@ -17,7 +17,7 @@ Leading a two-person team, we developed a Python program that reduced a UAV's dr
 
 ## Technical Approach  
 
-{% include image-gallery.html images="463_Flow.png" height="400" %} Structure Design Matrix
+{% include image-gallery.html images="Flow.jpg" height="400" %} Structure Design Matrix
 
 ### Literature Review  
 We began by completing a literature review of similar projects. This gave us an idea of what had been done before, and helped shape our optimization approach.  
