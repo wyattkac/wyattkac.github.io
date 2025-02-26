@@ -1,107 +1,36 @@
 ---
 layout: post
-title: UAV Optimization
+title: Multidisciplinary UAV Optimization
 description: 
-    Developing the Super Heavy booster catch project involves designing a robust launch tower with "chopstick" arms, advanced control systems for precise booster alignment, and integrating sophisticated software for real-time trajectory adjustments and structural engineering to handle immense forces.
+    Carrying out a UAV optimization involves picking a problem to optimize, selecting variables to use, choosing software with an API capable of performing the necessary calculations, and developing a program that systematically adjusts inputs until the solution converges, ensuring an efficient and effective design.
 skills: 
-  - Linux
+  - Python
+  - Git
 
-main-image: /FinalUnraid.jpg
+main-image: /463_Drone.png
 ---
 
 ---
 
-## Header 2  
-Use this for the header of each section
-### Header 3 
-Use this to have subsection if needed
+## Introduction  
+Leading a two-person team, we developed a Python program that reduced a UAV's drag by 15% when compared to the initial design, while maintaining radar cross-section (RCS) by varying the geometry. This results in significant fuel savings, leaving more room for payloads or a longer flight time. I focused on designing the geometry modification loop, which adjusted airfoil shape, wing parameters, and tail sizing, and the aerodynamic analysis, which was used to find lift, drag, and stability.  
 
+## Technical Approach  
 
-## Embedding images 
-### External images
-{% include image-gallery.html images="https://live.staticflickr.com/65535/52821641477_d397e56bc4_k.jpg, https://live.staticflickr.com/65535/52822650673_f074b20d90_k.jpg" height="400"%}
-<span style="font-size: 10px">"Starship Test Flight Mission" from https://www.flickr.com/photos/spacex/52821641477/</span>  
-You can put in multiple entries. All images will be at a fixed height in the same row. With smaller window, they will switch to columns.  
+{% include image-gallery.html images="463_Flow.png" height="400" %} Structure Design Matrix
 
-### Embeed images
-{% include image-gallery.html images="project2.jpg" height="400" %} 
-place the images in project folder/images then update the file path.   
+### Literature Review  
+We began by completing a literature review of similar projects. This gave us an idea of what had been done before, and helped shape our optimization approach.  
 
+### Methodology  
+We chose to use Python, as there were Python libraries or APIs for everything we needed to do. Our final project used openMDAO, OpenVSP, and RadarSimPy to calculate all needed values.  
 
-## Embedding youtube video
-The second video has the autoplay on. copy and paste the 11-digit id found in the url link. <br>
-*Example* : https://www.youtube.com/watch?v={**MhVw-MHGv4s**}&ab_channel=engineerguy
-{% include youtube-video.html id="MhVw-MHGv4s" autoplay= "false"%}
-{% include youtube-video.html id="XGC31lmdS6s" autoplay = "true" %}
+The structure design matrix (above) visually represents the optimization process. We start with any geometry, and feed it into openVSP, which creates a mesh. Since the Reynolds number (Re) depends on both size and velocity, we use the geometry specifications to calculate Re given the speed of the aircraft. VSPAero takes this information and calculates the lift (Cl) and drag (Cd) of the aircraft. Using the CG from OpenVSP and the CP from VSPAero, we compute the static margin to assess the stability of the aircraft. The mesh from OpenVSP is then used by RadarSimPy to give us the RCS of the aircraft. The algorithm iterates through geometry modifications until convergence.  
 
-you can also set up custom size by specifying the width (the aspect ratio has been set to 16/9). The default size is 560 pixels x 315 pixels.  
+#### Geometry  
 
-The width of the video below. Regardless of initial width, all the videos is responsive and will fit within the smaller screen.
-{% include youtube-video.html id="tGCdLEQzde0" autoplay = "false" width= "900px" %}  
+We allowed the program to create any four-digit NACA airfoil by varying camber, the location of camber, and thickness of the airfoil. The program also adjusted the wing size, angle of incidence, and location. To simplify the problem, the program adjusted tail sizing based on airfoil position. We validated stability by calculating the static margin in each iteration, ensuring the tail surfaces were properly sized. With more time, tail sizing could have been an independent variable, but this would have exponentially increased computation time. The optimization already required 500 iterations over 26 hours to converge. Lacking a defined gradient, we could not use a gradient-based solver, which significantly increased computation time.  
 
-<br>
+#### Constraints and Objective Function  
 
-## Adding a hozontal line
----
-
-## Starting a new line
-leave two spaces "  " at the end or enter <br>
-
-## Adding bold text
-this is how you input **bold text**
-
-## Adding italic text
-Italicized text is the *cat's meow*.
-
-## Adding ordered list
-1. First item
-2. Second item
-3. Third item
-4. Fourth item
-
-## Adding unordered list
-- First item
-- Second item
-- Third item
-- Fourth item
-
-## Adding code block
-```ruby
-def hello_world
-  puts "Hello, World!"
-end
-```
-
-```python
-def start()
-  print("time to start!")
-```
-
-```javascript
-let x = 1;
-if (x === 1) {
-  let x = 2;
-  console.log(x);
-}
-console.log(x);
-
-```
-
-## Adding external links
-[Wikipedia](https://en.wikipedia.org)
-
-
-## Adding block quote
-> A blockquote would look great if you need to highlight something
-
-
-## Adding table 
-
-| Header 1 | Header 2 |
-|----------|----------|
-| Row 1, Col 1 | Row 1, Col 2 |
-| Row 2, Col 1 | Row 2, Col 2 |
-
-make sure to leave aline betwen the table and the header
-
-
+We wanted to optimize RCS and the lift to drag ratio (L/D), as L/D defines the efficiency of the aircraft. Since our solver minimizes the objective function, we took the inverse of L/D (D/L) to ensure proper optimization. We then scaled D/L and RCS to comparable weights and combined them into a single objective function. To maintain feasibility, we constrained both the coefficient of lift and static margin, ensuring sufficient lift and stability.  
