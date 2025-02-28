@@ -2,106 +2,37 @@
 layout: post
 title: HPR Rocket Build
 description: 
-    Developing the Super Heavy booster catch project involves designing a robust launch tower with "chopstick" arms, advanced control systems for precise booster alignment, and integrating sophisticated software for real-time trajectory adjustments and structural engineering to handle immense forces.
+    Designing an HPR rocket involves designing an airframe that is strong, aerodynamic, and stable. To ensure 100% reliability, an avionics bay must be constructed with at least two different deployment mechanisms.
 skills: 
-  - Linux
+  - KiCad
+  - C++
 
-main-image: /FinalUnraid.jpg
+main-image: /L2.jpg
 ---
 
 ---
 
-## Header 2  
-Use this for the header of each section
-### Header 3 
-Use this to have subsection if needed
+## Introduction  
 
+High power rocketry (HPR) is a hobby where people design, build, and test high power rockets. Because of the amount of propellant used, it is necessary to get a certification. There are three certification levels:  
+- L1: Motors up to 640 Newton-seconds (Ns)  
+- L2: Motors up to 5120 Ns  
+- L3: Motors exceeding 5120 Ns  
 
-## Embedding images 
-### External images
-{% include image-gallery.html images="https://live.staticflickr.com/65535/52821641477_d397e56bc4_k.jpg, https://live.staticflickr.com/65535/52822650673_f074b20d90_k.jpg" height="400"%}
-<span style="font-size: 10px">"Starship Test Flight Mission" from https://www.flickr.com/photos/spacex/52821641477/</span>  
-You can put in multiple entries. All images will be at a fixed height in the same row. With smaller window, they will switch to columns.  
+## L1 Certification  
 
-### Embeed images
-{% include image-gallery.html images="project2.jpg" height="400" %} 
-place the images in project folder/images then update the file path.   
+For my L1, I built a [Wildman Journey 75](https://wildmanrocketry.com/products/journey-75), a fiberglass rocket known for its durability and included Rocksim design file. I successfully flew the rocket and earned my L1 certification on the first attempt.  
 
+## L2 Certification  
 
-## Embedding youtube video
-The second video has the autoplay on. copy and paste the 11-digit id found in the url link. <br>
-*Example* : https://www.youtube.com/watch?v={**MhVw-MHGv4s**}&ab_channel=engineerguy
-{% include youtube-video.html id="MhVw-MHGv4s" autoplay= "false"%}
-{% include youtube-video.html id="XGC31lmdS6s" autoplay = "true" %}
+### Airframe  
 
-you can also set up custom size by specifying the width (the aspect ratio has been set to 16/9). The default size is 560 pixels x 315 pixels.  
+For my L2, I decided to modify the Journey 75 I used for my L1. Since this rocket would fly with a larger motor, I needed to add an avionics bay. The increased weight from the avionics and larger motor shifted the center of mass. Using OpenRocket, I determined that adding a 2-foot section would restore stability. I modified the Rocksim file and assembled the airframe before starting work on the avionics bay.  
 
-The width of the video below. Regardless of initial width, all the videos is responsive and will fit within the smaller screen.
-{% include youtube-video.html id="tGCdLEQzde0" autoplay = "false" width= "900px" %}  
+### Avionics  
 
-<br>
+For the avionics, I needed two deployment methods for redundancy. I chose the Missile Works RRC3 for its affordability and proven reliability. Initially, I planned to use a custom-built flight computer for the second deployment method. However, since it remains untested, I decided to fly it as a payload instead. This will allow me to collect flight data, which will help validate its performance before integrating it into future recovery systems. The rocket is nearly complete, and I expect to launch within the next couple of months, weather permitting.  
 
-## Adding a hozontal line
----
+#### Why Build a Custom Flight Computer  
 
-## Starting a new line
-leave two spaces "  " at the end or enter <br>
-
-## Adding bold text
-this is how you input **bold text**
-
-## Adding italic text
-Italicized text is the *cat's meow*.
-
-## Adding ordered list
-1. First item
-2. Second item
-3. Third item
-4. Fourth item
-
-## Adding unordered list
-- First item
-- Second item
-- Third item
-- Fourth item
-
-## Adding code block
-```ruby
-def hello_world
-  puts "Hello, World!"
-end
-```
-
-```python
-def start()
-  print("time to start!")
-```
-
-```javascript
-let x = 1;
-if (x === 1) {
-  let x = 2;
-  console.log(x);
-}
-console.log(x);
-
-```
-
-## Adding external links
-[Wikipedia](https://en.wikipedia.org)
-
-
-## Adding block quote
-> A blockquote would look great if you need to highlight something
-
-
-## Adding table 
-
-| Header 1 | Header 2 |
-|----------|----------|
-| Row 1, Col 1 | Row 1, Col 2 |
-| Row 2, Col 1 | Row 2, Col 2 |
-
-make sure to leave aline betwen the table and the header
-
-
+I chose to design my own flight computer both to enhance functionality and as a learning opportunity. Typical COTS avionics rely solely on a barometric pressure sensor. My design integrates a barometric pressure sensor, GPS, and accelerometer with a Kalman Filter for sensor fusion. My avionics system also features raw flight data storage, enabling post-flight analysis to refine future designs. This project provides hands-on experience in PCB design and C++ programming, skills valuable for both industry and future personal projects.  

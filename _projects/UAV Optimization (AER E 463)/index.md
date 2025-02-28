@@ -17,7 +17,7 @@ Leading a two-person team, we developed a Python program that reduced a UAV's dr
 
 ## Technical Approach  
 
-{% include image-gallery.html images="Flow.jpg" height="400" %} Structure Design Matrix
+{% include image-gallery.html images="https://raw.githubusercontent.com/wyattkac/wyattkac.github.io/refs/heads/main/_projects/UAV%20Optimization%20(AER%20E%20463)/Flow.jpg" height="400"%} Structure Design Matrix
 
 ### Literature Review  
 We began by completing a literature review of similar projects. This gave us an idea of what had been done before, and helped shape our optimization approach.  
