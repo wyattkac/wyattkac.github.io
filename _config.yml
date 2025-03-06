@@ -50,14 +50,6 @@ skills:
     - Inventor (Autodesk)
     - KiCad
     - Ansys Mechanical APDL
-  - category: Prototyping
-    tools:
-    - SLA
-    - CNC
-    - FDM
-    - Laser Cutting
-    - Arduino / Raspberry Pi
-    - Breadboarding for circuit testing
   - category: Programming
     tools:
     - MATLAB
@@ -66,6 +58,21 @@ skills:
     - C++
     - Java
     - Git
+  - category: Prototyping
+    tools:
+    - SLA
+    - CNC
+    - FDM
+    - Laser Cutting
+    - Arduino / Raspberry Pi
+    - Breadboarding for circuit testing
+    - category: Electronics and Testing Tools
+    tools:
+    - Oscilloscope
+    - Vector Network Analyzer
+    - Digital Multimeter
+    - Signal Generator
+    - Power Supply
   - category: Software and OS
     tools:
     - Linux
