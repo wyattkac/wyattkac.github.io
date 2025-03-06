@@ -66,7 +66,7 @@ skills:
     - Laser Cutting
     - Arduino / Raspberry Pi
     - Breadboarding for circuit testing
-    - category: Electronics and Testing Tools
+  - category: Electronics and Testing Tools
     tools:
     - Oscilloscope
     - Vector Network Analyzer
