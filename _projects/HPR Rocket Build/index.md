@@ -2,7 +2,7 @@
 layout: post
 title: HPR Rocket Build
 description: 
-    Designing an HPR rocket requires developing an airframe that is strong, aerodynamic, and stable. To ensure high reliability, an avionics bay must be constructed with at least two different deployment mechanisms.
+    Designing an HPR rocket requires developing an airframe that is strong, aerodynamic, and stable. To ensure high reliability, an avionics bay must be constructed with at least two different deployment mechanisms, one of which I am designing and testing.
 skills: 
   - KiCad
   - C++
